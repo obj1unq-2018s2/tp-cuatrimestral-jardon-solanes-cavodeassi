@@ -1,0 +1,46 @@
+import Campeon.*
+import Oleada.*
+import Items.*
+
+describe "Liga De Leyendas" {
+	//campeones
+	const campeon01 			= 	new Campeon(puntosDeVida=50, puntosDeAtaque=15)
+	//oleadasm
+	const oleada01				=	new Oleada(cantidadDeMinions=10, plus=5)
+	//items
+	const anilloDuran01 		=	new AnilloDeDoran()
+	const tomoAmplificador01	=	new	TomoAmplificador()
+	
+	fixture {
+		campeon01.equiparItem(anilloDuran01)
+		campeon01.equiparItem(tomoAmplificador01)
+		campeon01.atacarA(oleada01)
+	}
+	//Tests Parte 1
+	test "Stats del campeon01 con Anillo de Doran, Tomo Amplificador equipados & ataque a oleada01" {
+		assert.equals(111.25,campeon01.vida())
+		assert.equals(30.25,campeon01.ataque())
+		assert.equals(5,campeon01.puntosDeDanio())
+		assert.equals(1,campeon01.bloqueos())
+	}
+	test "El Campeon se desequipa el Tomo Amplificador y NO muere" { 
+		/*El enunciado dice que hay que probar que el campeon muere, pero al momento de atacar a la oleada,
+		el campeon no recibe daño ya que cuenta con los bloqueos que le atribuye el tomo equipado*/
+		campeon01.desequiparItem(tomoAmplificador01)
+		assert.equals(2,campeon01.bloqueos())
+		assert.equals(110,campeon01.vida())
+		assert.equals(30,campeon01.ataque())
+		assert.equals(35,campeon01.puntosDeDanio())
+		assert.notThat(campeon01.estaMuerto())
+	}	
+	test "Hagamos que el Campeon Muera!" {
+		campeon01.desequiparItem(tomoAmplificador01)
+		campeon01.desequiparItem(anilloDuran01)
+		campeon01.atacarA(oleada01)
+		campeon01.atacarA(oleada01)
+		assert.notThat(campeon01.tieneBloqueos())
+		campeon01.atacarA(oleada01)	
+		assert.that(campeon01.estaMuerto()) //GAMEOVER
+	}
+	
+}

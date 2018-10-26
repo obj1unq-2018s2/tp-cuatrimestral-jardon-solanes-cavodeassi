@@ -1,11 +1,7 @@
 class Oleada {
-	var property cantidadDeMinions
-	var property plus
+	var cantidadDeMinions
+	var plus
 		
 	method danio() = cantidadDeMinions + plus
-	
-	method esAtacadaPor(unCampeon) {
-		unCampeon.recibirDanio(self.danio())
-	}
-		
+	method seDefiende(unCampeon) {  unCampeon.recibirAtaque(self.danio())  }
 }

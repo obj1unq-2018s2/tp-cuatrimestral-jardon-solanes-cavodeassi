@@ -1,50 +1,36 @@
 class Campeon {
-	var property puntosDeVida = 0
-	var puntosDeAtaque = 0
-	var puntosDeDanio = 0
-	var inventario = []
-	var cantidadDeBloqueos = 10
+	const puntosDeVida		= 0
+	const puntosDeAtaque	= 0
+	var	  puntosDeDanio		= 0
+	var   cantidadDeBloq	= 0
+	var   inventario		= []
 	
 	//stats
-	method vida() = puntosDeVida  
-	method ataque() = puntosDeAtaque
+	method vida() 			= puntosDeVida 	 + inventario.sum{	item => item.ptsVida(self)	} 
+	method ataque() 		= puntosDeAtaque + inventario.sum{	item => item.ptsAtaque(self)}
+	method puntosDeDanio()	= puntosDeDanio
+	method estaMuerto()		= self.vida()<=self.puntosDeDanio()
+	method bloqueos()		= cantidadDeBloq
+	method tieneBloqueos()  = self.bloqueos()>0
+	method ganaNBloq(n)		{	cantidadDeBloq += n	}
+	method pierdeNBloq(n)	{	cantidadDeBloq -= n	}
 	
-	//ataque y recibida de daño
-	
-	method recibirDanio(alguien) {
-		if(cantidadDeBloqueos > 0) {
-			cantidadDeBloqueos -= 1
+	//sistema de ataque & defensa REVISARLO.
+	method recibirAtaque(danio) {
+		if(self.tieneBloqueos()) {
+			self.pierdeNBloq(1)
 		}
 		else {
-		puntosDeDanio += alguien.danio()
+			self.recibirDanio(danio)
 		}
 	}
-	
-	method atacarA(alguien) {
-		self.recibirDanio(alguien)
-	     if(puntosDeDanio >= self.vida()) {
-	    	self.error("el campeon está muerto")
-          }
+	method recibirDanio(danio) {	puntosDeDanio += danio	}
+	method atacarA(oleada) {
+		oleada.seDefiende(self)
 	}
 	
    //items	
-	method agregarAInventario(unItem) {
-		inventario.add(unItem)
-	}
-	
-	method quitarDelInventario(unItem) {
-		inventario.remove(unItem)
-	}
-	
-	method equiparItem(unItem) {
-		unItem.efectoDeEquipado(self)
-	}
-	
-	method desequiparItem(unItem) {
-	   	unItem.efectoDeDesequipado(self)
-	}
-	
-	
-	
+	method equiparItem		(unItem) {	inventario.add(unItem); unItem.equipItem(self)		}
+	method desequiparItem	(unItem) {	inventario.remove(unItem); unItem.unequipItem(self)	}
 	
 }
