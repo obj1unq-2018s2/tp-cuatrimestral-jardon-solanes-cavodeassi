@@ -35,3 +35,4 @@ class Campeon {
 	method desequiparItem	(unItem) {	inventario.remove(unItem); unItem.unequipItem(self)	}
 	
 }
+//

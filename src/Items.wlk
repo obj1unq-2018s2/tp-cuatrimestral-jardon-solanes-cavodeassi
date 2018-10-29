@@ -32,3 +32,4 @@ class SombreroDeRabadon inherits TomoAmplificador {
 	override method equipItem	(unCampeon)	{ 	super(unCampeon); unCampeon.recibirDanio(5)	}
 	override method unequipItem	(unCampeon) {}
 }
+//
