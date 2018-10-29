@@ -1,6 +1,6 @@
 class Campeon {
 	const puntosDeVida		= 0
-	const puntosDeAtaque	= 0
+	const property puntosDeAtaque	= 0
 	var	  puntosDeDanio		= 0
 	var   cantidadDeBloq	= 0
 	var   inventario		= []
@@ -25,6 +25,7 @@ class Campeon {
 		}
 	}
 	method recibirDanio(danio) {	puntosDeDanio += danio	}
+	method recuperarDanio(danio) {  puntosDeDanio -= danio  }
 	method atacarA(oleada) {
 		oleada.seDefiende(self)
 	}

@@ -14,7 +14,7 @@ class AnilloDeDoran inherits Item {
 	override method ptsVida		(unCampeon)	=	60
 	override method ptsAtaque	(unCampeon)	=	15
 	override method equipItem 	(unCampeon) {	unCampeon.recibirDanio(5)	} 
-	override method unequipItem (unCampeon) {	unCampeon.recibirDanio(10)  }
+	override method unequipItem (unCampeon) {	unCampeon.recuperarDanio(10)  }
 	
 }
 class TomoAmplificador inherits Item {
@@ -28,7 +28,7 @@ class TomoAmplificador inherits Item {
 class SombreroDeRabadon inherits TomoAmplificador {
 	
 	override method ptsVida		(unCampeon)	= 	super(unCampeon) + 5
-	override method ptsAtaque	(unCampeon)	=	unCampeon.ataque() * 2
+	override method ptsAtaque	(unCampeon)	=	unCampeon.puntosDeAtaque() * 2
 	override method equipItem	(unCampeon)	{ 	super(unCampeon); unCampeon.recibirDanio(5)	}
 	override method unequipItem	(unCampeon) {}
 }
