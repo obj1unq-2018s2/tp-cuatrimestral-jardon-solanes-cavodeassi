@@ -6,7 +6,7 @@ describe "Liga De Leyendas" {
 	//campeones
 	const campeon01 			= 	new Campeon(puntosDeVida=50, puntosDeAtaque=15)
 	//oleadasm
-	const oleada01				=	new Oleada(cantidadDeMinions=10, plus=5)
+	const oleada01				=	new Oleada(cantidadDeMinions=10, plus=25)
 	//items
 	const anilloDoran01 		=	new AnilloDeDoran()
 	const tomoAmplificador01	=	new	TomoAmplificador()
@@ -16,6 +16,7 @@ describe "Liga De Leyendas" {
 		campeon01.equiparItem(anilloDoran01)
 		campeon01.equiparItem(tomoAmplificador01)
 	}
+	
 	//Tests Parte 1
 	test "Stats del campeon01 con Anillo de Doran & Tomo Amplificador equipados" {
 		assert.equals(111.25,campeon01.vida())
@@ -24,23 +25,45 @@ describe "Liga De Leyendas" {
 		assert.equals(2,campeon01.bloqueos())
 	}
 	
-	test "El Campeon ataca x3 a Oleada" {
+	test "El Campeon ataca x1 a Oleada, la Oleada muere" {
 		campeon01.atacarA(oleada01)
-		campeon01.atacarA(oleada01)
-		campeon01.atacarA(oleada01)
-		assert.equals(20,campeon01.puntosDeDanio())
-		assert.equals(0,campeon01.bloqueos())
+		assert.equals(0,oleada01.cantidadDeMinions())
+		assert.that(oleada01.estaMuerto())
 	}
-	test "El Campeon se desequipa el Tomo Amplificador y el Anillo de Doran: Muere" { 
+	
+		test "El Campeon ataca x3 a Oleada." {
+		campeon01.atacarA(oleada01)
+		campeon01.atacarA(oleada01)
+		campeon01.atacarA(oleada01)
+		//stats del campeon
+		assert.equals(5,campeon01.puntosDeDanio())
+		assert.equals(1,campeon01.bloqueos())
+		//stats de oleada
+		assert.equals(0,oleada01.cantidadDeMinions())
+	}
+	test "idem & el Campeon se desequipa el Anillo de Doran y Tomo Amplificador" { 
 		campeon01.atacarA(oleada01)
 		campeon01.atacarA(oleada01)
 		campeon01.atacarA(oleada01) 
-		campeon01.desequiparItem(tomoAmplificador01)
 		campeon01.desequiparItem(anilloDoran01)
+		campeon01.desequiparItem(tomoAmplificador01)
 		assert.equals(50,campeon01.vida())
 		assert.equals(15,campeon01.ataque())
+		assert.equals(30,campeon01.puntosDeDanio())
+		assert.equals(2,campeon01.bloqueos())
+	}	
+	
+		test "idem & el Campeon se equipa el Tomo Amplificador y luego desequipa: Muere" { 
+		campeon01.atacarA(oleada01)
+		campeon01.atacarA(oleada01)
+		campeon01.atacarA(oleada01) 
+		campeon01.desequiparItem(anilloDoran01) 	
+		campeon01.desequiparItem(tomoAmplificador01)
+		campeon01.equiparItem(tomoAmplificador01)
+		campeon01.desequiparItem(tomoAmplificador01)
+		assert.equals(5,campeon01.bloqueos())
+		assert.equals(50,campeon01.vida())
 		assert.equals(60,campeon01.puntosDeDanio())
-		assert.equals(1,campeon01.bloqueos())
-		assert.that(campeon01.estaMuerto()) //GAMEOVER
+		assert.that(campeon01.estaMuerto())										//GAMEOVER
 	}	
 }
