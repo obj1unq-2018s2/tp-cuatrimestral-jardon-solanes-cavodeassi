@@ -42,6 +42,8 @@ class Campeon {
 	method equiparItem		(unItem) 	{	inventario.add(unItem); unItem.equipItem(self)		}
 	method desequiparItem	(unItem) 	{	inventario.remove(unItem); unItem.unequipItem(self)	}
 	//compra
-	method comprarItem		(unItem)	{	if(self.tieneDinero(unItem.valor())) self.equiparItem(unItem)  	  }
+	method comprarItem		(unItem)	{	if(self.tieneDinero(unItem.valor())) self.equiparItem(unItem) 
+		                                                                         cantidadDeDinero -= unItem.valor()
+	} 
 	method venderItem		(unItem)	{	cantidadDeDinero += unItem.valor()/2; self.desequiparItem(unItem) }
 }
