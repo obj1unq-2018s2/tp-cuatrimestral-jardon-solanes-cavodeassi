@@ -43,7 +43,6 @@ class SombreroDeRabadon inherits TomoAmplificador {
 	override method ptsAtaque	(unCampeon)	=	unCampeon.puntosDeAtaque() * 2
 	override method equipItem	(unCampeon)	{ 	super(unCampeon); unCampeon.recibirDanio(5)	}
 	override method unequipItem	(unCampeon) {}
-	override method habilidadAct(unCampeon) {}
 }
 
 class PosionDeVida	inherits Item {
