@@ -1,0 +1,24 @@
+import Campeon.*
+import Oleada.*
+import Items.*
+
+describe "Liga De Leyendas" {
+	//campeones
+	const campeon01 			= 	new Campeon(puntosDeVida=50, puntosDeAtaque=20)
+	//oleadasm
+	const oleada01				=	new Oleada(cantidadDeMinions=10, plus=5)
+	//items
+	//const anilloDoran01 		=	new AnilloDeDoran()
+	//const tomoAmplificador01	=	new	TomoAmplificador()
+
+	fixture {
+		campeon01.atacarA(oleada01)
+	}
+	
+	//Tests Parte 2
+	test "Sistema Ataque Oleadas updated"{
+		assert.equals(0, oleada01.cantidadDeMinions())
+		assert.equals(20, campeon01.ataque())
+		assert.that(oleada01.estaMuerto())
+	}
+}
