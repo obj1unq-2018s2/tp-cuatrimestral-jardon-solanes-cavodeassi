@@ -9,8 +9,6 @@ class Item { 									/*SuperClass*/
 	method equipItem  			(unCampeon)		/*abstract*/
 	method unequipItem			(unCampeon)		/*abstract*/
 	method habilidadAct			(unCampeon) 	/*abstract*/ 
-	//preguntar si la habilidad Activable es sobre el Item o sobre el campeon,
-	//lo coherente seria que sea sobre el item.
 }
 
 class AnilloDeDoran inherits Item {
