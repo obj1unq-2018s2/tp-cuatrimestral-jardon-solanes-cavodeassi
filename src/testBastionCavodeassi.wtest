@@ -1,0 +1,43 @@
+import Campeon.*
+import Oleada.*
+import Items.*
+import ItemBastonCavodeassi.*
+
+describe "Test Baston del Vacio" {
+	//campeones
+	const campeon 				= 	new Campeon(puntosDeVida=50, puntosDeAtaque=15, cantidadDeDinero=800)
+	//oleadasm
+	const oleada				=	new Oleada(cantidadDeMinions=10, plus=25)
+	//items
+	const anilloDoran01 		=	new AnilloDeDoran()
+	const anilloDoran02 		=	new AnilloDeDoran()
+	const sombreroDeRabadon		= 	new SombreroDeRabadon()
+	const posionDeVida			=	new PosionDeVida()
+	const bastonDelVacio		=	new BastonDelVacio()
+	
+	fixture {
+		campeon.comprarItem(anilloDoran01)
+		campeon.comprarItem(anilloDoran02)
+		bastonDelVacio.agregarItem(posionDeVida)
+		bastonDelVacio.agregarItem(sombreroDeRabadon)
+		
+	}
+	
+	test "Dinero del campeon luego de comprar 2 anillos de Doran" {
+		assert.equals(200,campeon.dinero())
+	}
+
+	test "Equipar al campeon con el Baston del Vacio" {
+		campeon.comprarItem(bastonDelVacio)
+		assert.equals(173.75, campeon.vida())
+		assert.equals(75,campeon.ataque())
+		assert.equals(10, campeon.puntosDeDanio())
+	}
+	
+	test "Activar la habilidad activable del Baston" {
+		bastonDelVacio.activarHab(campeon)
+		assert.equals(0,campeon.puntosDeDanio()) 	//por habilidad act de la posion
+		assert.equals(500,campeon.dinero())			//por habilidad act de sombreroDeRabadon que hereda del tomo
+	}
+	
+}
