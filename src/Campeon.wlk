@@ -24,6 +24,8 @@ class Campeon {
 	method recibirDinero	(unDinero)  {  cantidadDeDinero = unDinero }
 	//sistema de ataque & defensa
 	method atacarA			(oleada)    {  oleada.seDefiende(self)  	}
+	/*metodo para el ejercito de minions */
+	method atacarAUn        (ejercito)  {   ejercito.oleadas().forEach({oleada => oleada.seDefiende(self)})}
 	
 	method recibirAtaque	(danio) 	{
 											if(self.tieneBloqueos()) {

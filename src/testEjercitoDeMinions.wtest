@@ -1,0 +1,21 @@
+import Campeon.*
+import Oleada.*
+import Items.*
+
+describe "test de ejercito de minions" {
+	//campeon
+	const campeon01 			= 	new Campeon(puntosDeVida=50, puntosDeAtaque=15, cantidadDeDinero = 300)
+	//oleadas
+	const oleada01				=	new Oleada(cantidadDeMinions=20, plus=5)
+	const oleada02				=	new Oleada(cantidadDeMinions=10, plus=15)
+	//ejercito
+	//cantidad de minions y plus están en 0 para que no me pida rellenar los atributos faltantes
+	var ejercito01              =   new Ejercito(cantidadDeMinions = 0, plus= 0, oleadas = #{oleada01, oleada02})
+
+	
+	test "el campeon ataca al ejercito de minions y todos mueren" {
+		campeon01.atacarAUn(ejercito01) 
+		assert.that(campeon01.estaMuerto())
+		assert.that(ejercito01.estanMuertos())
+	}
+}
