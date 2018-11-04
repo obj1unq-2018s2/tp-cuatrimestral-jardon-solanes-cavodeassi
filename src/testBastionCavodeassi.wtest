@@ -6,8 +6,8 @@ import ItemBastonCavodeassi.*
 describe "Test Baston del Vacio" {
 	//campeones
 	const campeon 				= 	new Campeon(puntosDeVida=50, puntosDeAtaque=15, cantidadDeDinero=800)
-	//oleadasm
-	const oleada				=	new Oleada(cantidadDeMinions=10, plus=25)
+	//oleadas
+	
 	//items
 	const anilloDoran01 		=	new AnilloDeDoran()
 	const anilloDoran02 		=	new AnilloDeDoran()
