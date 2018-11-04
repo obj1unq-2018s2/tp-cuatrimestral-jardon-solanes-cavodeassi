@@ -4,22 +4,30 @@ import Items.*
 
 describe "Liga De Leyendas" {
 	//campeones
-	const campeon01 			= 	new Campeon(puntosDeVida=50, puntosDeAtaque=20)
+	const campeon01 			= 	new Campeon(puntosDeVida=50, puntosDeAtaque=15)
 	//oleadasm
-	const oleada01				=	new Oleada(cantidadDeMinions=10, plus=5)
+	const oleada01				=	new Oleada(cantidadDeMinions=10, plus=25)
 	//items
+	const anillo                =   new AnilloDeDoran()
+	const tomo                  =   new TomoAmplificador()
 	//const anilloDoran01 		=	new AnilloDeDoran()
 	//const tomoAmplificador01	=	new	TomoAmplificador()
 
 	fixture {
+		campeon01.equiparItem(anillo)
+		campeon01.equiparItem(tomo)
 		campeon01.atacarA(oleada01)
+		campeon01.atacarA(oleada01)
+		campeon01.atacarA(oleada01)
+		campeon01.desequiparItem(anillo)
+		campeon01.desequiparItem(tomo)
+		campeon01.equiparItem(tomo)
+		campeon01.desequiparItem(tomo)
+		
 	}
 	
 	//Tests Parte 2
-	test "Nuevo sistema de ataque, oleada muerta y campeon recibe dinero"{
-		assert.equals(0, oleada01.cantidadDeMinions())
-		assert.equals(20, campeon01.ataque())
-		assert.equals(10, campeon01.dinero())
+	test "el campeon está muerto"{
 		assert.that(oleada01.estaMuerto())
 	}
 }
