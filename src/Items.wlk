@@ -8,7 +8,7 @@ class Item { 									/*SuperClass*/
 	method ptsAtaque  			(unCampeon)		/*abstract*/ 
 	method equipItem  			(unCampeon)		/*abstract*/
 	method unequipItem			(unCampeon)		/*abstract*/
-	method habilidadAct			(unCampeon) 	/*abstract*/ 
+	method activarHab			(unCampeon) 	/*abstract*/ 
 }
 
 class AnilloDeDoran inherits Item {
@@ -18,7 +18,7 @@ class AnilloDeDoran inherits Item {
 	override method ptsAtaque	(unCampeon)	=	15
 	override method equipItem 	(unCampeon) {	unCampeon.recibirDanio(5)	} 
 	override method unequipItem (unCampeon) {	unCampeon.recuperarDanio(10)  }
-	override method habilidadAct(unCampeon) {}
+	override method activarHab  (unCampeon) {}
 }
 class TomoAmplificador inherits Item {
 	
@@ -27,8 +27,8 @@ class TomoAmplificador inherits Item {
 	override method ptsAtaque   (unCampeon)	= 	unCampeon.puntosDeDanio()*0.05 
 	override method equipItem   (unCampeon)	{	unCampeon.ganaNBloq(2)		}
 	override method unequipItem (unCampeon)	{	unCampeon.ganaNBloq(1);	unCampeon.recibirDanio(30)	}
-	override method habilidadAct(unCampeon) {	if(self.puedeActivarHabilidad(unCampeon)) 
-													unCampeon.recibeDinero(500)
+	override method activarHab  (unCampeon) {	if(self.puedeActivarHabilidad(unCampeon)) 
+													unCampeon.recibirDinero(500)
 													usoDeHabilidad+=1
 											}
 	method puedeActivarHabilidad(unCampeon) = 	unCampeon.dinero()<500 && usoDeHabilidad == 0	
@@ -46,11 +46,11 @@ class SombreroDeRabadon inherits TomoAmplificador {
 class PosionDeVida	inherits Item {
 	
 	override method valor		()			=	50
-	override method ptsVida		(unCampeon)	{}
-	override method ptsAtaque	(unCampeon) {}
+	override method ptsVida		(unCampeon)	=	0
+	override method ptsAtaque	(unCampeon) =	0
 	override method equipItem	(unCampeon) {}
 	override method unequipItem	(unCampeon)	{}
-	override method habilidadAct(unCampeon) {	if(self.puedeActivarHabilidad(unCampeon)) 
+	override method activarHab  (unCampeon) {	if(self.puedeActivarHabilidad(unCampeon)) 
 													unCampeon.recuperarDanio(50)
 													usoDeHabilidad+=1
 											}
