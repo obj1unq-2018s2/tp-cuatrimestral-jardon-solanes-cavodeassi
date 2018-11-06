@@ -28,7 +28,7 @@ class TomoAmplificador inherits Item {
 	override method equipItem   (unCampeon)	{	unCampeon.ganaNBloq(2)		}
 	override method unequipItem (unCampeon)	{	unCampeon.ganaNBloq(1);	unCampeon.recibirDanio(30)	}
 	override method activarHab  (unCampeon) {	if(self.puedeActivarHabilidad(unCampeon)) 
-													unCampeon.recibirDinero(500)
+													unCampeon.cantidadDeDinero(500)//modificado para que el valor sea seteado
 													usoDeHabilidad+=1
 											}
 	method puedeActivarHabilidad(unCampeon) = 	unCampeon.dinero()<500 && usoDeHabilidad == 0	
