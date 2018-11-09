@@ -4,30 +4,59 @@ import Items.*
 
 describe "Liga De Leyendas" {
 	//campeones
-	const campeon01 			= 	new Campeon(puntosDeVida=50, puntosDeAtaque=15)
-	//oleadasm
+	const campeon01 			= 	new Campeon(puntosDeVida=50, puntosDeAtaque=15, cantidadDeDinero=1450)
+	//oleadas
 	const oleada01				=	new Oleada(cantidadDeMinions=10, plus=25)
 	//items
-	const anillo                =   new AnilloDeDoran()
-	const tomo                  =   new TomoAmplificador()
-	//const anilloDoran01 		=	new AnilloDeDoran()
-	//const tomoAmplificador01	=	new	TomoAmplificador()
+	const anilloDeDoran         =   new AnilloDeDoran()
+	const tomoAmplificador      =   new TomoAmplificador()
+	const sombreroDeRabadon		=	new SombreroDeRabadon()
+	const posionDeVida			=	new	PosionDeVida()
 
 	fixture {
-		campeon01.equiparItem(anillo)
-		campeon01.equiparItem(tomo)
-		campeon01.atacarA(oleada01)
-		campeon01.atacarA(oleada01)
-		campeon01.atacarA(oleada01)
-		campeon01.desequiparItem(anillo)
-		campeon01.desequiparItem(tomo)
-		campeon01.equiparItem(tomo)
-		campeon01.desequiparItem(tomo)
-		
+		campeon01.comprarItem(anilloDeDoran)
+		campeon01.comprarItem(tomoAmplificador)
+		campeon01.comprarItem(sombreroDeRabadon)
+		campeon01.comprarItem(posionDeVida)
 	}
 	
 	//Tests Parte 2
-	test "el campeon está muerto"{
+	
+	test "el campeon ataca a la oleada y la mata" {
+		campeon01.atacarA(oleada01)
 		assert.that(oleada01.estaMuerto())
+		assert.equals(10,campeon01.cantidadDeDinero())
+	}
+	
+	test "el campeon se quedo sin un mango" {
+		assert.equals(0,campeon01.cantidadDeDinero())
+	}
+	
+	test "el campeon tiene 4 items en su inventario/equipados" {
+		assert.equals(4,campeon01.inventario().size())
+	}
+	
+	test "el campeon vende todos los items" {
+		campeon01.venderItem(anilloDeDoran)
+		campeon01.venderItem(tomoAmplificador)
+		campeon01.venderItem(sombreroDeRabadon)
+		campeon01.venderItem(posionDeVida)
+		assert.equals(725,campeon01.cantidadDeDinero())
+		assert.equals([],campeon01.inventario())
+	}
+	
+	test "el campeon juega con las habilidades activables de sus items" {
+		assert.that(tomoAmplificador.puedeActivarHab(campeon01))
+		tomoAmplificador.activarHabilidad(campeon01)
+		assert.equals(500,campeon01.cantidadDeDinero())
+		assert.notThat(tomoAmplificador.puedeActivarHab(campeon01))
+		assert.notThat(sombreroDeRabadon.puedeActivarHab(campeon01))
+		assert.equals(10,campeon01.puntosDeDanio())
+		assert.that(posionDeVida.puedeActivarHab(campeon01))
+		posionDeVida.activarHabilidad(campeon01)
+		assert.that(posionDeVida.puedeActivarHab(campeon01))
+		posionDeVida.activarHabilidad(campeon01)
+		assert.notThat(posionDeVida.puedeActivarHab(campeon01))
+		assert.equals(0,campeon01.puntosDeDanio())
 	}
 }

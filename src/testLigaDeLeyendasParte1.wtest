@@ -5,7 +5,7 @@ import Items.*
 describe "Liga De Leyendas" {
 	//campeones
 	const campeon01 			= 	new Campeon(puntosDeVida=50, puntosDeAtaque=15)
-	//oleadasm
+	//oleadas
 	const oleada01				=	new Oleada(cantidadDeMinions=10, plus=25)
 	//items
 	const anilloDoran01 		=	new AnilloDeDoran()

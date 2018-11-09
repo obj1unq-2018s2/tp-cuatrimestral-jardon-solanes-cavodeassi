@@ -1,7 +1,7 @@
 import Campeon.*
 import Oleada.*
 import Items.*
-import ItemBastonCavodeassi.*
+import ItemBaston.*
 
 describe "Test Baston del Vacio" {
 	//campeones
@@ -24,7 +24,7 @@ describe "Test Baston del Vacio" {
 	}
 	
 	test "Dinero del campeon luego de comprar 2 anillos de Doran" {
-		assert.equals(200,campeon.dinero())
+		assert.equals(200,campeon.cantidadDeDinero())
 	}
 
 	test "Equipar al campeon con el Baston del Vacio" {
@@ -35,9 +35,9 @@ describe "Test Baston del Vacio" {
 	}
 	
 	test "Activar la habilidad activable del Baston" {
-		bastonDelVacio.activarHab(campeon)
-		assert.equals(0,campeon.puntosDeDanio()) 	//por habilidad act de la posion
-		assert.equals(500,campeon.dinero())			//por habilidad act de sombreroDeRabadon que hereda del tomo
+		bastonDelVacio.activarHabilidad(campeon)
+		assert.equals(0,campeon.puntosDeDanio()) 				//por habilidad act de la posion
+		assert.equals(500,campeon.cantidadDeDinero())			//por habilidad act de sombreroDeRabadon que hereda del tomo
 	}
 	
 }

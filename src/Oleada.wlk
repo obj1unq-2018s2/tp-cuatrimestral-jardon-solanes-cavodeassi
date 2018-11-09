@@ -2,8 +2,8 @@ class Oleada {
 	var property cantidadDeMinions
 	var property plus
 		
-	method danio()	 	= cantidadDeMinions + plus
-	method estaMuerto() = cantidadDeMinions == 0
+	method danio			()	 		= cantidadDeMinions + plus
+	method estaMuerto		() 			= cantidadDeMinions == 0
 	
 	method minionsAEliminar	(unCampeon) = unCampeon.ataque().min(cantidadDeMinions) 
 	
