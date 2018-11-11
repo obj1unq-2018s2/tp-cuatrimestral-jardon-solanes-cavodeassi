@@ -15,17 +15,17 @@ class Oleada {
 										}
 }
 /*parte individual del ejercito de minions */
-class Ejercito inherits Oleada {
+class Ejercito  {
 	var property oleadas = #{}
 	
 	method agregarAOleada(unaOleada) {
 		oleadas.add(unaOleada)
 	}
     	
-	override method minionsAEliminar(unCampeon) = oleadas.forEach({oleada 
+	 method minionsAEliminar(unCampeon) = oleadas.forEach({oleada 
 		                                        =>unCampeon.ataque().min(oleada.cantidadDeMinions())})
 										
-	override method danio()	= oleadas.sum({oleada => oleada.cantidadDeMinions() + plus})
+	 method danio()	= oleadas.sum({oleada => oleada.cantidadDeMinions() })
 	
     method estanMuertos() = oleadas.all({oleada => oleada.cantidadDeMinions() == 0})
 

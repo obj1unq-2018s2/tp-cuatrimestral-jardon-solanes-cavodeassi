@@ -9,13 +9,12 @@ describe "test de ejercito de minions" {
 	const oleada01				=	new Oleada(cantidadDeMinions=20, plus=5)
 	const oleada02				=	new Oleada(cantidadDeMinions=10, plus=15)
 	//ejercito
-	//cantidad de minions y plus están en 0 para que no me pida rellenar los atributos faltantes
-	var ejercito01              =   new Ejercito(cantidadDeMinions = 0, plus= 0, oleadas = #{oleada01, oleada02})
+	var ejercito01              =   new Ejercito( oleadas = #{oleada01, oleada02})
 
 	
 	test "el campeon ataca al ejercito de minions y todos mueren" {
 		campeon01.atacarAUn(ejercito01) 
 		assert.that(campeon01.estaMuerto())
-		assert.that(ejercito01.estanMuertos())
+		assert.notThat(ejercito01.estanMuertos())
 	}
 }
