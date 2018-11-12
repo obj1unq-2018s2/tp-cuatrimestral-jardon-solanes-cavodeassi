@@ -7,6 +7,8 @@ describe "Liga De Leyendas" {
 	const campeon01 			= 	new Campeon(puntosDeVida=50, puntosDeAtaque=15, cantidadDeDinero=1450)
 	//oleadas
 	const oleada01				=	new Oleada(cantidadDeMinions=10, plus=25)
+	const oleada02              =   new Oleada(cantidadDeMinions=20, plus=10)
+	const oleada03              =   new Oleada(cantidadDeMinions=30, plus=15)
 	//items
 	const anilloDeDoran         =   new AnilloDeDoran()
 	const tomoAmplificador      =   new TomoAmplificador()
@@ -59,4 +61,24 @@ describe "Liga De Leyendas" {
 		assert.notThat(posionDeVida.puedeActivarHab(campeon01))
 		assert.equals(0,campeon01.puntosDeDanio())
 	}
+	
+	test "el campeon ataca a dos oleadas y se queda con 30 de dinero" {
+		campeon01.atacarA(oleada01)
+		campeon01.atacarA(oleada02)
+		assert.equals(campeon01.cantidadDeDinero(), 30)
+	}
+	
+	test "el campeon ataca y queda con 120 de vida y 60 de dinero" {
+		campeon01.atacarA(oleada01)
+		campeon01.atacarA(oleada02)
+		campeon01.atacarA(oleada03)
+		assert.notThat(campeon01.estaMuerto())
+		assert.equals(0, oleada01.cantidadDeMinions())
+		assert.equals(0, oleada02.cantidadDeMinions())
+		assert.equals(0, oleada03.cantidadDeMinions())
+		assert.equals(120, campeon01.vida())
+		assert.equals(campeon01.cantidadDeDinero(), 60)
+		
+	}
+
 }

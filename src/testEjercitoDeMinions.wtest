@@ -16,5 +16,6 @@ describe "test de ejercito de minions" {
 		campeon01.atacarAUn(ejercito01) 
 		assert.that(campeon01.estaMuerto())
 		assert.notThat(ejercito01.estanMuertos())
+		assert.equals(campeon01.cantidadDeDinero(), 325)
 	}
 }
