@@ -78,7 +78,17 @@ describe "Liga De Leyendas" {
 		assert.equals(0, oleada03.cantidadDeMinions())
 		assert.equals(120, campeon01.vida())
 		assert.equals(campeon01.cantidadDeDinero(), 60)
-		
+	}
+	
+	test "el campeon de desequipa los items pelea contra dos oleadas y muere"{
+		campeon01.desequiparItem(anilloDeDoran)
+		campeon01.desequiparItem(tomoAmplificador)
+		campeon01.desequiparItem(sombreroDeRabadon)
+		campeon01.desequiparItem(posionDeVida)
+		assert.equals(50, campeon01.vida())
+		campeon01.atacarA(oleada02)
+		campeon01.atacarA(oleada03)
+		assert.that(campeon01.estaMuerto())
 	}
 
 }
