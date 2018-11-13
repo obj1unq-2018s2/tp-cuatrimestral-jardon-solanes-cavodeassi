@@ -26,6 +26,10 @@ describe "Test Baston del Vacio" {
 	test "Dinero del campeon luego de comprar 2 anillos de Doran" {
 		assert.equals(200,campeon.cantidadDeDinero())
 	}
+	
+	test "Cantidad de materiales dentro del baston" {
+		assert.equals(2,bastonDelVacio.materiales().size())
+	}
 
 	test "Equipar al campeon con el Baston del Vacio" {
 		campeon.comprarItem(bastonDelVacio)

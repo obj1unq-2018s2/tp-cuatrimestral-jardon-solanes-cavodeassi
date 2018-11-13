@@ -1,11 +1,11 @@
 import Campeon.*
 class Soporte inherits Campeon{
-	var property campeonVinculado
+	var campeonVinculado
 	
 	override method vida()= super() + campeonVinculado.vidaExtra()
 	override method ataque()=super() + campeonVinculado.ataqueExtra() 
 	
-	
+	method campeonVinculado()= campeonVinculado
 	
 	method vincular(campeon){ campeonVinculado=campeon }
 	

@@ -5,17 +5,24 @@ import soporte.*
 
 describe "Test para Soporte" {
 		//campeones
-	const draven= new Campeon(puntosDeVida = 150, puntosDeAtaque = 25 , cantidadDeDinero = 1000)
+	const draven= new Campeon(puntosDeVida = 150, puntosDeAtaque = 25 , cantidadDeDinero = 1100)
 	const maokai= new Campeon(puntosDeVida = 150, puntosDeAtaque = 25 , cantidadDeDinero = 1000)
 		//soporte
-	const janna=  new Soporte(puntosDeVida = 150, puntosDeAtaque =25 , cantidadDeDinero = 100, 
-		campeonVinculado=0 /*valor para inicializar la variable */)
-		//oleada
-	const oleada= new Oleada(cantidadDeMinions = 100, plus = 0)
+	const janna=  new Soporte(puntosDeVida = 150, puntosDeAtaque =25 , cantidadDeDinero = 1100, 
+		campeonVinculado=null /*valor para inicializar la variable */)
+		//oleadas
+	const oleada1= new Oleada(cantidadDeMinions = 100, plus = 0)
+	const oleada2= new Oleada(cantidadDeMinions = 100, plus = 0)
+	const oleada3= new Oleada(cantidadDeMinions = 100, plus = 0)
+	const oleada4= new Oleada(cantidadDeMinions = 100, plus = 0)
+	const oleada5= new Oleada(cantidadDeMinions = 100, plus = 0)
+		//ejercito
+	const ejercito= new Ejercito(oleadas=#{oleada1,oleada2,oleada3,oleada4,oleada5})
 	
 	//items
 	const tomo= new TomoAmplificador()
 	const posion= new PosionDeVida()
+	const sombrero= new SombreroDeRabadon()
 	
 	
 	test "Comportamiento de campeones vinculados a Janna" {
@@ -23,33 +30,68 @@ describe "Test para Soporte" {
 		
 		janna.vincular(draven)
 		assert.equals( janna.campeonVinculado(), draven )
-		assert.equals(1000,draven.cantidadDeDinero())
-		draven.atacarA(oleada)
-		assert.equals(75,oleada.cantidadDeMinions())
+		assert.equals(1100,draven.cantidadDeDinero())
+		draven.atacarA(oleada1)
+		assert.equals(75,oleada1.cantidadDeMinions())
 		assert.equals(100,draven.puntosDeDanio())
-		assert.equals(1025,draven.cantidadDeDinero())
-		janna.atacarA(oleada)
-		assert.equals(50,oleada.cantidadDeMinions())
+		assert.equals(1125,draven.cantidadDeDinero())
+		janna.atacarA(oleada1)
+		assert.equals(50,oleada1.cantidadDeMinions())
 		assert.equals(90,draven.puntosDeDanio())
 		
 		//Maokai
 		janna.vincular(maokai)
-		assert.equals(50,oleada.cantidadDeMinions())
-		maokai.atacarA(oleada)
+		assert.equals(50,oleada1.cantidadDeMinions())
+		maokai.atacarA(oleada1)
 		assert.equals(50,maokai.puntosDeDanio())
-		assert.equals(25,oleada.cantidadDeMinions())
-		janna.atacarA(oleada)
+		assert.equals(25,oleada1.cantidadDeMinions())
+		janna.atacarA(oleada1)
 		assert.equals(40,maokai.puntosDeDanio())
 		assert.equals(1025,maokai.cantidadDeDinero())
 		maokai.comprarItem(tomo)		
 		assert.equals(525,maokai.cantidadDeDinero())
 		janna.comprarItem(posion)
-		assert.equals(100,janna.cantidadDeDinero())
+		assert.equals(1100,janna.cantidadDeDinero())
 		assert.that(janna.inventario().contains(tomo))
 		assert.that(janna.inventario().contains(posion))
 		
-		assert.equals(true,oleada.estaMuerto())//oleada muerta
+		assert.equals(true,oleada1.estaMuerto())//oleada muerta
 		
+	}
+	
+	test"campeon y soporte vs ejercito"{
+		janna.vincular(draven)
+		draven.atacarAUn(ejercito)
+		assert.notThat(ejercito.estanMuertos())
+		assert.that(draven.estaMuerto()) //draven ataca y muere
+		janna.atacarAUn(ejercito)
+		assert.that(janna.estaMuerto())  //janna intenta ayudar y muere
+	}
+	
+	test "campeon y soporte vs ejercito Revancha"{
+		janna.vincular(draven)
+		//draven compra items y tiene bloqueos
+		assert.equals(0,draven.bloqueos())
+		draven.comprarItem(sombrero)
+		assert.equals(2,draven.bloqueos())
+		draven.comprarItem(tomo)
+		assert.equals(4,draven.bloqueos())
+		
+		//janna compra items y tiene bloqueos
+		assert.equals(0,janna.bloqueos())
+		janna.comprarItem(sombrero)
+		assert.equals(2,janna.bloqueos())
+		janna.comprarItem(tomo)
+		assert.equals(4,janna.bloqueos())
+		
+		//empieza el ataque
+		draven.atacarAUn(ejercito)		
+		assert.equals(0,draven.bloqueos())
+		assert.notThat(draven.estaMuerto())
+		janna.atacarAUn(ejercito)
+		assert.that(ejercito.estanMuertos())
+		assert.notThat(janna.estaMuerto())
+		assert.equals(0,janna.bloqueos())
 	}
 	
 	
