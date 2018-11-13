@@ -7,8 +7,12 @@ describe "Liga De Leyendas" {
 	const campeon01 			= 	new Campeon(puntosDeVida=50, puntosDeAtaque=15, cantidadDeDinero=1450)
 	//oleadas
 	const oleada01				=	new Oleada(cantidadDeMinions=10, plus=25)
+<<<<<<< HEAD
 	const oleada02              =   new Oleada(cantidadDeMinions=20, plus=10)
 	const oleada03              =   new Oleada(cantidadDeMinions=30, plus=15)
+=======
+	const oleada02				=   new Oleada(cantidadDeMinions=500, plus= 100)
+>>>>>>> branch 'master' of https://github.com/obj1unq-2018s2/tp-cuatrimestral-jardon-solanes-cavodeassi.git
 	//items
 	const anilloDeDoran         =   new AnilloDeDoran()
 	const tomoAmplificador      =   new TomoAmplificador()
@@ -28,6 +32,23 @@ describe "Liga De Leyendas" {
 		campeon01.atacarA(oleada01)
 		assert.that(oleada01.estaMuerto())
 		assert.equals(10,campeon01.cantidadDeDinero())
+	}
+	
+	test"el campeon ataca a oleada y muere primero"{
+		campeon01.atacarA(oleada02)  				//gasta bloqueo 1
+		assert.equals(10,campeon01.puntosDeDanio()) //danio recibido al equipar anillo y sombrero
+		campeon01.atacarA(oleada02)  				//gasta bloqueo 2
+		assert.equals(10,campeon01.puntosDeDanio())
+		campeon01.atacarA(oleada02)  				//gasta bloqueo 3
+		assert.equals(10,campeon01.puntosDeDanio())
+		campeon01.atacarA(oleada02)  				//gasta bloqueo 4
+		assert.equals(358,oleada02.danio())
+		assert.equals(242,campeon01.cantidadDeDinero())
+		campeon01.atacarA(oleada02)
+		assert.that(campeon01.estaMuerto())			//campeon muerto 
+		assert.equals(368,campeon01.puntosDeDanio())//danio de oleada + danio que tenia el campeon
+		assert.equals(320.4,campeon01.cantidadDeDinero())//sumo el oro al atacar por ultima vez.
+		assert.notThat(oleada02.estaMuerto())
 	}
 	
 	test "el campeon se quedo sin un mango" {
