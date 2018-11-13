@@ -14,7 +14,7 @@ describe "Liga De Leyendas" {
 	const anilloDeDoran         =   new AnilloDeDoran()
 	const tomoAmplificador      =   new TomoAmplificador()
 	const sombreroDeRabadon		=	new SombreroDeRabadon()
-	const posionDeVida			=	new	PosionDeVida()
+	const posionDeVida			=	new	PocionDeVida()
 
 	fixture {
 		campeon01.comprarItem(anilloDeDoran)

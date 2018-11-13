@@ -12,7 +12,7 @@ describe "Test Baston del Vacio" {
 	const anilloDoran01 		=	new AnilloDeDoran()
 	const anilloDoran02 		=	new AnilloDeDoran()
 	const sombreroDeRabadon		= 	new SombreroDeRabadon()
-	const posionDeVida			=	new PosionDeVida()
+	const posionDeVida			=	new PocionDeVida()
 	const bastonDelVacio		=	new BastonDelVacio()
 	
 	fixture {

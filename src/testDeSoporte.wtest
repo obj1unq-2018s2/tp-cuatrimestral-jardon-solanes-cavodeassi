@@ -21,7 +21,7 @@ describe "Test para Soporte" {
 	
 	//items
 	const tomo= new TomoAmplificador()
-	const posion= new PosionDeVida()
+	const posion= new PocionDeVida()
 	const sombrero= new SombreroDeRabadon()
 	
 	

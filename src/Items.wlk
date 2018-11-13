@@ -48,7 +48,7 @@ class SombreroDeRabadon inherits TomoAmplificador {
 	override method equipItem		(unCampeon)	{ 	super(unCampeon); unCampeon.recibirDanio(5)	}
 }
 
-class PosionDeVida	inherits ItemConHabilidadActivable {
+class PocionDeVida	inherits ItemConHabilidadActivable {
 	
 	override method valor			()			=	50
 	override method ptsVida			(unCampeon)	=	0
