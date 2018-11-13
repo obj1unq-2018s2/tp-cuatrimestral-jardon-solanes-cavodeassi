@@ -17,13 +17,15 @@ class ItemConHabilidadActivable inherits Item {
 	method usarHabilidad			()			{	usoDeHabilidad+=1	}
 }
 
-class AnilloDeDoran inherits Item {
+class AnilloDeDoran inherits ItemConHabilidadActivable {
 	
 	override method valor			()			= 	300
 	override method ptsVida			(unCampeon)	=	60
 	override method ptsAtaque		(unCampeon)	=	15
 	override method equipItem 		(unCampeon) {	unCampeon.recibirDanio(5)		} 
 	override method unequipItem 	(unCampeon) {	unCampeon.recuperarDanio(10)  	}
+	override method puedeActivarHab (unCampeon) = 	false
+	override method activarHabilidad(unCampeon) {}
 }
 class TomoAmplificador inherits ItemConHabilidadActivable {
 	
